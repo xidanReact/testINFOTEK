@@ -1,6 +1,5 @@
 import type { PageInfo, Pagination } from '@/types/api'
 
-/** Фильтры списка так, как ими пользуется приложение. */
 export interface ListParams {
   page?: number
   perPage?: number
@@ -29,7 +28,6 @@ export function toListQuery(params: ListParams = {}): ListQuery {
   return query
 }
 
-// В ответе то же поле называется per_page — book.yaml:594
 export function fromPagination(pagination?: Pagination | null): PageInfo {
   return {
     total: pagination?.total ?? 0,
