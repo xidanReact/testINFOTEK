@@ -6,9 +6,17 @@ import '@/assets/scss/main.scss'
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+async function startMocks() {
+  if (import.meta.env.VITE_USE_MOCKS === 'false') return
 
-app.use(createPinia())
-app.use(router)
+  const { worker } = await import('@/mocks/browser')
+  await worker.start({ onUnhandledRequest: 'bypass' })
+}
 
-app.mount('#app')
+async function bootstrap() {
+  await startMocks()
+
+  createApp(App).use(createPinia()).use(router).mount('#app')
+}
+
+bootstrap()
