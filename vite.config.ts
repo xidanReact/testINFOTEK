@@ -18,7 +18,7 @@ export default defineConfig({
         // Bootstrap 5 внутри себя всё ещё использует @import, который Dart Sass
         // ругает как устаревший. Пока Bootstrap не переедет на @use — глушим шум,
         // иначе каждая сборка тонет в предупреждениях из node_modules.
-        silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'mixed-decls'],
+        silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'if-function'],
       },
     },
   },
