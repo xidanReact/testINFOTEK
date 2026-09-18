@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { ApiError } from '@/api/ApiError'
+import BaseAlert from '@/components/ui/BaseAlert.vue'
+import BaseInput from '@/components/ui/BaseInput.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -13,8 +15,6 @@ const password = ref('')
 const loading = ref(false)
 const fieldErrors = ref<Record<string, string>>({})
 const commonErrors = ref<string[]>([])
-
-const expired = computed(() => route.query.reason === 'expired')
 
 async function submit() {
   loading.value = true
@@ -54,45 +54,29 @@ function redirectTarget(): string {
         <div class="card-body p-4">
           <h1 class="h4 mb-4">Вход</h1>
 
-          <div v-if="expired" class="alert alert-warning" role="alert">
-            Сессия истекла, войдите заново.
-          </div>
-
-          <div v-for="message in commonErrors" :key="message" class="alert alert-danger">
+          <BaseAlert v-for="message in commonErrors" :key="message" class="mb-3">
             {{ message }}
-          </div>
+          </BaseAlert>
 
           <form novalidate @submit.prevent="submit">
-            <div class="mb-3">
-              <label class="form-label" for="username">Логин</label>
-              <input
-                id="username"
-                v-model.trim="username"
-                class="form-control"
-                :class="{ 'is-invalid': fieldErrors.username }"
-                autocomplete="username"
-                required
-              />
-              <div v-if="fieldErrors.username" class="invalid-feedback">
-                {{ fieldErrors.username }}
-              </div>
-            </div>
+            <BaseInput
+              v-model.trim="username"
+              class="mb-3"
+              label="Логин"
+              autocomplete="username"
+              :error="fieldErrors.username"
+              required
+            />
 
-            <div class="mb-4">
-              <label class="form-label" for="password">Пароль</label>
-              <input
-                id="password"
-                v-model="password"
-                type="password"
-                class="form-control"
-                :class="{ 'is-invalid': fieldErrors.password }"
-                autocomplete="current-password"
-                required
-              />
-              <div v-if="fieldErrors.password" class="invalid-feedback">
-                {{ fieldErrors.password }}
-              </div>
-            </div>
+            <BaseInput
+              v-model="password"
+              class="mb-4"
+              label="Пароль"
+              type="password"
+              autocomplete="current-password"
+              :error="fieldErrors.password"
+              required
+            />
 
             <button class="btn btn-primary w-100" type="submit" :disabled="loading">
               <span
