@@ -34,7 +34,7 @@ const form = useForm(
 
 const { values, errors, commonErrors, submitting } = form
 
-// Обложка обязательна только при создании (book.yaml:478-482). При
+// Обложка обязательна только при создании (book.yaml:538-542). При
 // редактировании нетронутый файл означает PATCH без обложки.
 const editing = computed(() => Boolean(props.initial))
 

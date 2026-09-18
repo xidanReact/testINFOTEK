@@ -208,7 +208,7 @@ export const handlers = [
     return noContent()
   }),
 
-  // Год обязателен: без него отчёт не имеет смысла (book.yaml:344-350).
+  // Год обязателен: без него отчёт не имеет смысла (book.yaml:391-396).
   http.get(`${BASE}/reports/top-authors`, async ({ request }) => {
     await lag()
     const year = Number(new URL(request.url).searchParams.get('year'))

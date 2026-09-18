@@ -3,9 +3,7 @@ import { computed } from 'vue'
 import AuthorSelect from '@/components/ui/AuthorSelect.vue'
 import BaseSelect from '@/components/ui/BaseSelect.vue'
 import SearchInput from '@/components/ui/SearchInput.vue'
-import type { SelectOption } from '@/components/ui/BaseSelect.vue'
-
-const FIRST_YEAR = 1900
+import { yearOptions } from '@/utils/years'
 
 const search = defineModel<string>('search', { default: '' })
 const authorId = defineModel<string>('authorId', { default: '' })
@@ -28,13 +26,7 @@ const selectedYear = computed<string | number | null>({
   },
 })
 
-const years = computed<SelectOption[]>(() => {
-  const current = new Date().getFullYear()
-  return Array.from({ length: current - FIRST_YEAR + 1 }, (_, index) => {
-    const value = current - index
-    return { value, label: String(value) }
-  })
-})
+const years = yearOptions()
 
 const hasFilters = computed(() => Boolean(search.value || authorId.value || year.value))
 </script>
