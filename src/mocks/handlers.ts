@@ -9,6 +9,7 @@ import {
   validateBookFields,
   validateFullName,
 } from './payload'
+import { notifySubscribers } from './smspilot'
 import type { BookFields } from './payload'
 import type { BookRecord } from './fixtures'
 
@@ -81,6 +82,9 @@ export const handlers = [
     }
 
     db.books.unshift(book)
+
+    void notifySubscribers(book)
+
     return ok(serializeBook(book), 201)
   }),
 
