@@ -47,8 +47,6 @@ const total = computed(() => pagination.value.total)
       @reset="reset"
     />
 
-    <!-- Скелетоны той же размерности, что и карточки: страница не прыгает,
-         когда данные приезжают. -->
     <div v-if="loading" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
       <div v-for="index in PER_PAGE" :key="index" class="col">
         <BookCardSkeleton />

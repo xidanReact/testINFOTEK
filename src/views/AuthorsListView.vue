@@ -1,7 +1,4 @@
 <script setup lang="ts">
-// Список отдаёт только AuthorShort — id и full_name (book.yaml:622-636).
-// Колонки «книг в каталоге» здесь быть не может: количество живёт в /authors/{id}
-// и в отчёте ТОП-10. Это ограничение контракта, а не недоделанная колонка.
 import { RouterLink } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useAuthors } from '@/composables/useAuthors'

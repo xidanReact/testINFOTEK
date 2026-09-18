@@ -11,7 +11,6 @@ const year = defineModel<string>('year', { default: '' })
 
 const emit = defineEmits<{ reset: [] }>()
 
-// Фильтры хранятся строками, а селекты работают с числами — переводим на границе.
 const author = computed<number | number[] | null>({
   get: () => (authorId.value ? Number(authorId.value) : null),
   set: (value) => {

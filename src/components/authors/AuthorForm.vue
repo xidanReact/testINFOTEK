@@ -7,7 +7,6 @@ import BaseInput from '@/components/ui/BaseInput.vue'
 import type { Author } from '@/types/api'
 
 const props = defineProps<{
-  // Запрос делает вью — она же решает, куда уйти после успеха.
   save: (fullName: string) => Promise<unknown>
   initial?: Author | null
 }>()
@@ -31,7 +30,6 @@ async function onSubmit(): Promise<void> {
   await form.submit(() => props.save(values.fullName.trim()))
 }
 
-// Длину и прочее проверяет сервер, его 422 покажется под полем.
 function validate(): FormErrors {
   return values.fullName.trim() ? {} : { fullName: 'Укажите ФИО автора' }
 }

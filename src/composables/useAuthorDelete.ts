@@ -4,8 +4,6 @@ import { ApiError } from '@/api/ApiError'
 import { useToast } from './useToast'
 import type { AuthorShort } from '@/types/api'
 
-// Удаление автора нужно и в списке, и на его странице — отличается только тем,
-// что делать после успеха.
 export function useAuthorDelete(onRemoved: (author: AuthorShort) => void | Promise<void>) {
   const toast = useToast()
 

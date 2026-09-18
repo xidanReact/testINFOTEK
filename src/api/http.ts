@@ -15,7 +15,7 @@ export interface HttpClient {
 }
 
 const instance = axios.create({
-  baseURL: '/api/v1', // book.yaml:10
+  baseURL: '/api/v1',
   headers: { Accept: 'application/json' },
 })
 

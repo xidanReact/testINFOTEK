@@ -36,8 +36,6 @@ async function submit() {
   }
 }
 
-// Редирект берём только относительный: чужой абсолютный адрес из query —
-// это открытый редирект.
 function redirectTarget(): string {
   const redirect = route.query.redirect
   if (typeof redirect === 'string' && redirect.startsWith('/') && !redirect.startsWith('//')) {

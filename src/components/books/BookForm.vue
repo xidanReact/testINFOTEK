@@ -14,8 +14,6 @@ const MIN_YEAR = 1500
 const MAX_YEAR = new Date().getFullYear() + 1
 
 const props = defineProps<{
-  // Запрос делает вью: она же решает, куда уйти после успеха. Форма только
-  // ждёт результат, чтобы показать 422 под полями.
   save: (payload: BookPayload, cover: File | null) => Promise<unknown>
   initial?: Book | null
 }>()
@@ -34,8 +32,6 @@ const form = useForm(
 
 const { values, errors, commonErrors, submitting } = form
 
-// Обложка обязательна только при создании (book.yaml:538-542). При
-// редактировании нетронутый файл означает PATCH без обложки.
 const editing = computed(() => Boolean(props.initial))
 
 const authorIds = computed<number | number[] | null>({
@@ -55,8 +51,6 @@ async function onSubmit(): Promise<void> {
   await form.submit(() => props.save(payload(), values.cover))
 }
 
-// Проверяем только очевидное — пустое обязательное поле и год вне разумного
-// диапазона. Остальное проверит сервер, его 422 покажем под полями.
 function validate(): FormErrors {
   const invalid: FormErrors = {}
 

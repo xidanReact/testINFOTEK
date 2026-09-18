@@ -51,7 +51,6 @@ function onKeydown(event: KeyboardEvent) {
 
   if (event.key !== 'Tab') return
 
-  // Свой Bootstrap-JS мы не подключаем, поэтому фокус держим в диалоге руками.
   const items = focusable()
   if (!items.length) return
 

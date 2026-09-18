@@ -15,9 +15,6 @@ export function useList<T>(
   const loading = ref(false)
   const error = ref<ApiError | null>(null)
 
-  // Быстрый набор в поиске отправляет несколько запросов подряд, и ответы
-  // возвращаются вразнобой. Применяем только ответ на последний запрос,
-  // иначе в списке мигают устаревшие результаты.
   let lastRequest = 0
 
   async function reload(): Promise<void> {

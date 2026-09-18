@@ -1,6 +1,5 @@
 const FIRST_YEAR = 1900
 
-// Годы по убыванию: свежие сверху, их выбирают чаще.
 export function yearOptions(first = FIRST_YEAR): { value: number; label: string }[] {
   const current = new Date().getFullYear()
 

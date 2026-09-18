@@ -12,7 +12,7 @@ export type ListQuery = Record<string, string | number>
 
 const LIST_PARAM_NAMES: Record<keyof ListParams, string> = {
   page: 'page',
-  perPage: 'per-page', // да, через дефис — book.yaml:52
+  perPage: 'per-page',
   authorId: 'author_id',
   year: 'year',
   search: 'search',

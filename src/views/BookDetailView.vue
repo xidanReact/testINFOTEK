@@ -22,8 +22,6 @@ const error = ref<ApiError | null>(null)
 const confirming = ref(false)
 const removing = ref(false)
 
-// Со страницы автора можно перейти с одной книги на другую — маршрут тот же,
-// компонент переиспользуется, поэтому следим за параметром, а не грузим в onMounted.
 watch(() => props.id, load, { immediate: true })
 
 async function load(): Promise<void> {
@@ -47,7 +45,6 @@ async function remove(): Promise<void> {
   removing.value = true
 
   try {
-    // DELETE отвечает 204 без тела (book.yaml:200-201) — результата тут нет.
     await booksApi.remove(Number(props.id))
     toast.success('Книга удалена')
     await router.replace({ name: 'books' })

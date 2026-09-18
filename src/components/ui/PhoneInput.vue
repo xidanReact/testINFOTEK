@@ -31,8 +31,6 @@ const describedBy = computed(() => {
       <span v-if="required" class="text-danger" aria-hidden="true">*</span>
     </label>
 
-    <!-- Маска висит на самом input: директива, поставленная на компонент,
-         досталась бы его корневому div, а не полю. -->
     <input
       :id="id"
       v-model="model"

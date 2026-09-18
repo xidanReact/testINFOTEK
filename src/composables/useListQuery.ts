@@ -4,8 +4,6 @@ import type { LocationQuery, LocationQueryRaw } from 'vue-router'
 
 export type QueryFilters = Record<string, string>
 
-// Состояние фильтров держим строками: в адресной строке всё равно строки,
-// а превращение в число — забота того, кому нужно число.
 export function useListQuery<T extends QueryFilters>(defaults: T) {
   const route = useRoute()
   const router = useRouter()
@@ -13,9 +11,6 @@ export function useListQuery<T extends QueryFilters>(defaults: T) {
   const filters = reactive(read(route.query)) as T
   const page = ref(readPage(route.query))
 
-  // Пока раскладываем значения из адреса обратно в состояние, собственные
-  // наблюдатели молчат — иначе «назад» со сменой фильтра сбросил бы страницу
-  // и тут же переписал адрес, из которого мы только что пришли.
   let applying = false
 
   watch(filters, () => {
@@ -70,7 +65,6 @@ export function useListQuery<T extends QueryFilters>(defaults: T) {
     return result
   }
 
-  // Пустые значения в адрес не пишем, иначе после сброса остаётся ?search=&year=
   function toQuery(): LocationQueryRaw {
     const query: LocationQueryRaw = {}
     for (const [key, value] of Object.entries(filters)) {

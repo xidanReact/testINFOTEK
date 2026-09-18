@@ -9,7 +9,6 @@ import BaseAlert from '@/components/ui/BaseAlert.vue'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import type { Author } from '@/types/api'
 
-// Одна вью на создание и редактирование: режим определяет параметр маршрута.
 const props = defineProps<{ id?: string }>()
 
 const router = useRouter()

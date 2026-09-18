@@ -6,14 +6,11 @@ import { isValidPhone, toE164 } from '@/utils/phone'
 import BaseAlert from '@/components/ui/BaseAlert.vue'
 import PhoneInput from '@/components/ui/PhoneInput.vue'
 
-// Форма видна всем: по заданию подписка — право гостя, и у пользователя
-// его никто не отнимает.
 const props = defineProps<{ authorId: number }>()
 
 const phone = ref('')
 const error = ref('')
 const sending = ref(false)
-// Повторная подписка — не ошибка ввода, поэтому у неё своя ветка и свой тон.
 const result = ref<'done' | 'exists' | null>(null)
 
 watch(phone, () => {

@@ -28,8 +28,6 @@ const loading = ref(false)
 const failed = ref(false)
 const expanded = ref(false)
 const activeIndex = ref(-1)
-// Имена выбранных авторов приходят либо из ответа поиска, либо из options:
-// на странице редактирования книги id уже выбраны, а искать их незачем.
 const names = ref(new Map<number, string>())
 
 let timer: ReturnType<typeof setTimeout> | undefined

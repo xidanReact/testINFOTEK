@@ -10,8 +10,6 @@ const props = defineProps<{
 
 const emit = defineEmits<{ 'update:page': [page: number] }>()
 
-// Первая, последняя, текущая с соседями и многоточия между ними — не больше
-// семи слотов, иначе на широком каталоге пагинация уезжает в две строки.
 const slots = computed<Slot[]>(() => {
   const { page, totalPages } = props
   if (totalPages <= 7) {

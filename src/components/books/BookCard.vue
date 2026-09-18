@@ -21,7 +21,6 @@ const to = computed(() => ({ name: 'book', params: { id: props.book.id } }))
 
     <div class="card-body d-flex flex-column">
       <h2 class="h6 card-title mb-1">
-        <!-- Ссылка растянута на всю карточку: кликается и обложка, и пустое место. -->
         <RouterLink class="stretched-link book-card__title" :to="to">{{ book.title }}</RouterLink>
       </h2>
 
@@ -47,8 +46,6 @@ const to = computed(() => ({ name: 'book', params: { id: props.book.id } }))
   color: var(--bs-primary);
 }
 
-// Ссылки на авторов лежат под растянутой ссылкой карточки — поднимаем,
-// иначе клик по фамилии откроет книгу.
 .book-card__author {
   position: relative;
   z-index: 2;

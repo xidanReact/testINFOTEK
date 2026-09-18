@@ -10,7 +10,6 @@ import BookForm from '@/components/books/BookForm.vue'
 import type { Book } from '@/types/api'
 import type { BookPayload } from '@/api/bookRequest'
 
-// Одна вью на создание и редактирование: режим определяет параметр маршрута.
 const props = defineProps<{ id?: string }>()
 
 const router = useRouter()
@@ -50,7 +49,6 @@ async function save(payload: BookPayload, cover: File | null): Promise<void> {
   const current = book.value
 
   if (current) {
-    // Файл не трогали — cover пустой, и bookRequest сам уйдёт на PATCH с JSON.
     const updated = await booksApi.update(current.id, payload, cover)
     toast.success('Книга обновлена')
     await router.push({ name: 'book', params: { id: updated.id } })

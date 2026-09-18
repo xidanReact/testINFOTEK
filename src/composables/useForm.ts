@@ -4,8 +4,6 @@ import { ApiError } from '@/api/ApiError'
 export type FormErrors = Record<string, string>
 
 export interface FormOptions {
-  // Серверные имена полей → ключи формы: 422 приходит с author_ids,
-  // а в форме поле называется authorIds.
   aliases?: FormErrors
 }
 
@@ -15,8 +13,6 @@ export function useForm<T extends Record<string, unknown>>(initial: T, options: 
   const commonErrors = ref<string[]>([])
   const submitting = ref(false)
 
-  // Ошибка поля живёт до первой правки: иначе сообщение висит над значением,
-  // которое пользователь уже исправил.
   for (const key of Object.keys(initial)) {
     watch(
       () => values[key],
@@ -49,8 +45,6 @@ export function useForm<T extends Record<string, unknown>>(initial: T, options: 
 
     if (failure.isValidation) errors.value = rename(failure.fieldErrors, options.aliases ?? {})
 
-    // 422 показываем под полями. Общий алерт — только если раскладывать нечего:
-    // сервер прислал ошибку без имени поля или это вообще не валидация.
     if (Object.keys(errors.value).length) return
 
     commonErrors.value = failure.commonErrors.length ? failure.commonErrors : [failure.message]

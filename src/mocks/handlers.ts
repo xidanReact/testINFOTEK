@@ -198,8 +198,6 @@ export const handlers = [
     if (index === -1) return notFound('Автор не найден')
 
     db.authors.splice(index, 1)
-    // Книги удалённого автора остаются в каталоге — у книги может быть
-    // несколько авторов, и терять её из-за одного из них неправильно.
     for (const book of db.books) {
       book.author_ids = book.author_ids.filter((authorId) => authorId !== id)
     }
@@ -208,7 +206,6 @@ export const handlers = [
     return noContent()
   }),
 
-  // Год обязателен: без него отчёт не имеет смысла (book.yaml:391-396).
   http.get(`${BASE}/reports/top-authors`, async ({ request }) => {
     await lag()
     const year = Number(new URL(request.url).searchParams.get('year'))
@@ -234,8 +231,6 @@ export const handlers = [
     return ok({ year, items })
   }),
 
-  // Подписка гостя на новые книги автора — эндпоинт из спеки проекта,
-  // в book.yaml его ещё нет (docs/superpowers/specs/...#предлагаемый-контракт-подписки).
   http.post(`${BASE}/authors/:id/subscriptions`, async ({ request, params }) => {
     await lag()
     const author = db.authors.find((item) => item.id === Number(params.id))

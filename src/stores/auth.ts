@@ -12,8 +12,6 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = computed(() => Boolean(token.value))
   const isGuest = computed(() => !isAuthenticated.value)
 
-  // Протухший токен отбрасываем на старте: иначе гость увидит интерфейс
-  // пользователя, а первое же действие вернёт 401.
   function restore(): void {
     if (expiresAt.value && new Date(expiresAt.value) <= new Date()) clear()
   }
@@ -37,7 +35,6 @@ export const useAuthStore = defineStore('auth', () => {
     clearSession()
   }
 
-  // В спеке нет /auth/logout, поэтому выход чисто клиентский.
   return {
     token,
     user,

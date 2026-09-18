@@ -9,8 +9,6 @@ import BaseAlert from '@/components/ui/BaseAlert.vue'
 import BaseSelect from '@/components/ui/BaseSelect.vue'
 import type { TopAuthor } from '@/types/api'
 
-// За 1964-й в моках больше всего книг — с ним отчёт открывается непустым.
-// На настоящем API уместнее текущий год.
 const DEFAULT_YEAR = 1964
 const SKELETON_ROWS = 5
 const LEADERS = 3
@@ -71,9 +69,6 @@ async function load(): Promise<void> {
       </div>
     </div>
 
-    <!-- Год обязателен (book.yaml:391-396). Селект пустым не бывает, но если год
-         всё же потеряется — например, в присланной ссылке, — сервер ответит 400,
-         и это тот же алерт. -->
     <BaseAlert v-if="error" title="Отчёт не собрался">
       {{ error.fieldErrors.year ?? error.message }}
       <template #action>
@@ -111,7 +106,6 @@ async function load(): Promise<void> {
         </tbody>
 
         <tbody v-else>
-          <!-- rank приходит с сервера (book.yaml:654-664) — на клиенте не считаем. -->
           <tr
             v-for="author in items"
             :key="author.author_id"
@@ -135,7 +129,6 @@ async function load(): Promise<void> {
 </template>
 
 <style scoped>
-/* Первая тройка подсвечена строкой: Bootstrap берёт фон ячеек из этой переменной. */
 .top-authors__leader {
   --bs-table-bg: var(--bs-warning-bg-subtle);
 }

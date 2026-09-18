@@ -15,7 +15,6 @@ export function mapErrors(errors: ErrorItem[] = []): MappedErrors {
   for (const error of errors) {
     if (!error?.message) continue
     if (error.field) {
-      // если бэк прислал несколько ошибок на поле — показываем первую
       if (!(error.field in byField)) byField[error.field] = error.message
     } else {
       common.push(error.message)

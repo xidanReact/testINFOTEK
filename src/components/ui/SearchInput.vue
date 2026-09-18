@@ -13,8 +13,6 @@ const props = withDefaults(
   { debounce: 400 },
 )
 
-// Инпут живёт своим значением, наружу оно уходит с задержкой — иначе каждая
-// буква улетает в запрос.
 const text = ref(model.value)
 let timer: ReturnType<typeof setTimeout> | undefined
 
@@ -25,7 +23,6 @@ watch(text, (value) => {
   }, props.debounce)
 })
 
-// Значение сменили снаружи — например, кнопкой «Сбросить».
 watch(model, (value) => {
   if (value === text.value.trim()) return
   clearTimeout(timer)
