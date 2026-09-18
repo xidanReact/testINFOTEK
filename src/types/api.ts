@@ -1,4 +1,3 @@
-
 export interface ApiEnvelope<T> {
   success: boolean
   data: T
@@ -80,4 +79,14 @@ export interface LoginData {
   token: string
   expires_at: string
   user: SessionUser
+}
+
+export interface ListResult<T> {
+  items: T[]
+  pagination: PageInfo
+}
+
+export interface TopAuthorsData {
+  year: number
+  items: TopAuthor[]
 }

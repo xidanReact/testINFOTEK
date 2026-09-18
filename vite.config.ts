@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
@@ -21,10 +21,5 @@ export default defineConfig({
         silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'if-function'],
       },
     },
-  },
-  test: {
-    // тестируем только чистую логику, DOM не нужен
-    environment: 'node',
-    include: ['src/**/*.spec.ts'],
   },
 })
