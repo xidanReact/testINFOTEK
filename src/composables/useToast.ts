@@ -10,7 +10,6 @@ export interface Toast {
 
 const TIMEOUT = 4000
 
-
 const items = ref<Toast[]>([])
 let lastId = 0
 

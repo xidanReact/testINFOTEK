@@ -13,7 +13,6 @@ interface Identified {
   id: number
 }
 
-
 export const db = {
   authors: seedAuthors.map((author) => ({ ...author })) as AuthorRecord[],
   books: seedBooks.map((book) => ({ ...book, author_ids: [...book.author_ids] })) as BookRecord[],

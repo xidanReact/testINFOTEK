@@ -1,4 +1,3 @@
-
 export const SESSION_KEYS = {
   token: 'auth.token',
   user: 'auth.user',

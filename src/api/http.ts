@@ -5,7 +5,6 @@ import { ApiError } from './ApiError'
 import { clearSession, readToken } from './session'
 import type { ApiErrorEnvelope } from '@/types/api'
 
-
 export interface HttpClient {
   <T = unknown>(config: AxiosRequestConfig): Promise<T>
   get<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<T>

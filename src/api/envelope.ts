@@ -1,6 +1,5 @@
 import type { ApiEnvelope, ErrorItem, MappedErrors } from '@/types/api'
 
-
 export function unwrap<T>(body: unknown): T | null {
   if (!body) return null
   if (typeof body === 'object' && 'data' in body) {

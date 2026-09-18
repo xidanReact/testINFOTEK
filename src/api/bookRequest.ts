@@ -1,4 +1,3 @@
-
 export interface BookPayload {
   title: string
   year: number
