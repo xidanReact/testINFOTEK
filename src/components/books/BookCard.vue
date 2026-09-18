@@ -43,20 +43,6 @@ const to = computed(() => ({ name: 'book', params: { id: props.book.id } }))
 </template>
 
 <style scoped lang="scss">
-.cover-thumb {
-  aspect-ratio: 2 / 3;
-  width: 100%;
-  object-fit: cover;
-  background-color: var(--bs-secondary-bg);
-}
-
-.cover-thumb--empty {
-  display: grid;
-  place-items: center;
-  font-size: 0.875rem;
-  color: var(--bs-secondary-color);
-}
-
 .book-card__title:hover {
   color: var(--bs-primary);
 }

@@ -1,7 +1,6 @@
 import { db } from './db'
 import type { ErrorItem } from '@/types/api'
 
-
 export interface BookFields {
   title?: string
   year?: number
