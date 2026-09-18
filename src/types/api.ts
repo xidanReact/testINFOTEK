@@ -50,6 +50,13 @@ export interface TopAuthor {
   books_count: number
 }
 
+export interface Subscription {
+  id: number
+  author_id: number
+  phone: string
+  created_at: string
+}
+
 export interface Pagination {
   total: number
   page: number

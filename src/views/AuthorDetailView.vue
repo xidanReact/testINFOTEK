@@ -5,6 +5,7 @@ import { authorsApi } from '@/api/authors'
 import { ApiError } from '@/api/ApiError'
 import { useAuthStore } from '@/stores/auth'
 import { useAuthorDelete } from '@/composables/useAuthorDelete'
+import SubscribeForm from '@/components/authors/SubscribeForm.vue'
 import BaseAlert from '@/components/ui/BaseAlert.vue'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import ConfirmDialog from '@/components/ui/ConfirmDialog.vue'
@@ -90,30 +91,45 @@ async function load(): Promise<void> {
         </div>
       </div>
 
-      <!-- Здесь встанет форма подписки на новые книги автора — этап 12. -->
+      <div class="row g-4">
+        <div class="col-12 col-lg-8">
+          <h2 class="h5 mb-3">Книги</h2>
 
-      <h2 class="h5 mb-3">Книги</h2>
+          <p v-if="!author.books.length" class="text-body-secondary">
+            Книг этого автора в каталоге пока нет.
+          </p>
 
-      <p v-if="!author.books.length" class="text-body-secondary">
-        Книг этого автора в каталоге пока нет.
-      </p>
-
-      <div v-else class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
-        <div v-for="book in author.books" :key="book.id" class="col">
-          <article class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h3 class="h6 card-title mb-1">
-                <RouterLink
-                  class="stretched-link author-books__title"
-                  :to="{ name: 'book', params: { id: book.id } }"
-                >
-                  {{ book.title }}
-                </RouterLink>
-              </h3>
-              <p class="text-body-secondary small mb-0">{{ book.year }}</p>
+          <div v-else class="row row-cols-1 row-cols-sm-2 g-3">
+            <div v-for="book in author.books" :key="book.id" class="col">
+              <article class="card h-100 shadow-sm">
+                <div class="card-body">
+                  <h3 class="h6 card-title mb-1">
+                    <RouterLink
+                      class="stretched-link author-books__title"
+                      :to="{ name: 'book', params: { id: book.id } }"
+                    >
+                      {{ book.title }}
+                    </RouterLink>
+                  </h3>
+                  <p class="text-body-secondary small mb-0">{{ book.year }}</p>
+                </div>
+              </article>
             </div>
-          </article>
+          </div>
         </div>
+
+        <aside class="col-12 col-lg-4">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h2 class="h6 mb-2">Новые книги автора</h2>
+              <p class="text-body-secondary small mb-3">
+                Пришлём SMS, когда в каталоге появится новая книга.
+              </p>
+
+              <SubscribeForm :author-id="author.id" />
+            </div>
+          </div>
+        </aside>
       </div>
 
       <ConfirmDialog
