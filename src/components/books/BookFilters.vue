@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { computed } from 'vue'
 import AuthorSelect from '@/components/ui/AuthorSelect.vue'
-import BaseInput from '@/components/ui/BaseInput.vue'
 import BaseSelect from '@/components/ui/BaseSelect.vue'
+import SearchInput from '@/components/ui/SearchInput.vue'
 import type { SelectOption } from '@/components/ui/BaseSelect.vue'
 
-const DEBOUNCE = 400
 const FIRST_YEAR = 1900
 
 const search = defineModel<string>('search', { default: '' })
@@ -13,26 +12,6 @@ const authorId = defineModel<string>('authorId', { default: '' })
 const year = defineModel<string>('year', { default: '' })
 
 const emit = defineEmits<{ reset: [] }>()
-
-// Инпут живёт своим значением, в фильтр оно уходит с задержкой — иначе каждая
-// буква улетает в запрос.
-const text = ref(search.value)
-let timer: ReturnType<typeof setTimeout> | undefined
-
-watch(text, (value) => {
-  clearTimeout(timer)
-  timer = setTimeout(() => {
-    search.value = value.trim()
-  }, DEBOUNCE)
-})
-
-watch(search, (value) => {
-  if (value === text.value.trim()) return
-  clearTimeout(timer)
-  text.value = value
-})
-
-onBeforeUnmount(() => clearTimeout(timer))
 
 // Фильтры хранятся строками, а селекты работают с числами — переводим на границе.
 const author = computed<number | number[] | null>({
@@ -63,7 +42,7 @@ const hasFilters = computed(() => Boolean(search.value || authorId.value || year
 <template>
   <form class="row g-3 align-items-end mb-4" role="search" @submit.prevent>
     <div class="col-12 col-md-5">
-      <BaseInput v-model="text" label="Название" type="search" placeholder="Например, Пикник" />
+      <SearchInput v-model="search" label="Название" placeholder="Например, Пикник" />
     </div>
 
     <div class="col-12 col-md-4">
